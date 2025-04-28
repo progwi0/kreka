@@ -1,98 +1,89 @@
+import gi
+gi.require_version("Gtk", "3.0")
+gi.require_version("WebKit2", "4.1")
+from gi.repository import Gtk, WebKit2
 import os
 import webbrowser
-import tk as tk
-from tkinter import messagebox as dialogus
-from ttkbootstrap import *
-from ttkbootstrap.constants import *
-from tkinterweb import HtmlFrame
 
-app = Window(themename="litera")
-app.title("Kreka")
+kreka = Gtk.Window(title = "Kreka")
+kreka.set_default_size(1280, 960)
+kreka.set_icon_from_file("/usr/share/icons/kreka.png")
+ui = Gtk.ScrolledWindow()
 
-homus = os.path.expanduser("~")
-patus = os.path.join(homus, ".progwi0")
-themepath = os.path.join(patus, "theme.txt")
+header = Gtk.HeaderBar()
+header.set_show_close_button(True)
 
-simplus = "~/.progwi0/theme.txt"
+krekacookie = Gtk.Button(label = "🍪")
+krekacookie.connect("clicked", lambda krekacookie:menu.popup(None, None, None, None, 0, Gtk.get_current_event_time()))
 
-if not os.path.exists(simplus):
-    os.system("cd ~ && mkdir .progwi0 && cd .progwi0 && touch theme.txt")
+home = Gtk.Button(label = "🏠")
+home.connect("clicked", lambda home:webview.load_uri("https://progwi0.github.io/"))
 
-def search():
-    query = adress.get()
-    web.load_website(f"https://www.google.com/search?q={query}")
+back = Gtk.Button(label = "⬅️")
+forward = Gtk.Button(label = "➡️")
 
-def goto():
-    query = adress.get()
-    web.load_website(f"https://{query}")
+back.connect("clicked", lambda back:webview.go_back())
+forward.connect("clicked", lambda forward:webview.go_forward())
 
-def info():
-    dialogus.showinfo("🍪", "Kreka 7.0\nCreated in 2025 by progwi0.")
+entry = Gtk.Entry()
+entry.set_hexpand(True)
 
-def light():
-    app.style.theme_use("litera")
-    with open(themepath, "w") as file:
-        file.write("litera")
+entry.connect("activate", lambda entry:webview.load_uri("https://www.google.com/search?q=" + entry.get_text()))
 
-def dark():
-    app.style.theme_use("darkly")
-    with open(themepath, "w") as file:
-        file.write("darkly")
+header.set_custom_title(entry)
 
-top = Frame(app)
-top.pack(fill="x", pady="2", padx="2")
+goto = Gtk.Button(label = "➡️")
+goto.connect("clicked", lambda goto:webview.load_uri(entry.get_text()))
 
-home = Button(top, text = "🏠", width=1.5, command = lambda:web.load_website("https://progwi0.github.io/"), bootstyle = SECONDARY)
-home.pack(side="left", padx="2")
+header.pack_start(home)
+header.pack_start(back)
+header.pack_start(forward)
+header.pack_start(entry)
+header.pack_end(goto)
+header.pack_end(krekacookie)
 
-adress = Entry(top)
-adress.pack(side="left", fill="both", expand=True)
+menu = Gtk.Menu()
 
-search = Button(top, text = "🔍", width=1.5, command=search, bootstyle = SECONDARY)
-search.pack(side="left", padx="2")
+newwindow = Gtk.MenuItem(label = "New window")
+newwindow.connect("activate", lambda newwindow:os.system("kreka"))
+menu.append(newwindow)
 
-goto = Button(top, text = "➡️", width=1.5, command=goto, bootstyle = SECONDARY)
-goto.pack(side="left", padx="2")
+update = Gtk.MenuItem(label = "Update (only for pix version)")
+update.connect("activate", lambda update:os.system("pix reinstall kreka"))
+menu.append(update)
 
-mps = Frame(app)
-mps.pack(fill="x", pady="2", padx="2")
+mysite = Gtk.MenuItem(label = "My site")
+mysite.connect("activate", lambda mysite:webbrowser.open("https://progwi0.github.io/"))
+menu.append(mysite)
 
-kreka = Button(mps, text = "🍪", width=1.5, command = lambda:menu.post(app.winfo_pointerx(), app.winfo_pointery()), bootstyle = SECONDARY)
-kreka.pack(side="left", padx="2")
+def about(widget):
+    dialogus = Gtk.AboutDialog()
+    
+    dialogus.set_name("Kreka")
+    dialogus.set_version("8.0")
+    dialogus.set_copyright("© 2025 progwi0")
+    dialogus.set_comments("Simple web-browser on GTK3!")
+    dialogus.set_website("https://progwi0.github.io/")
+    dialogus.set_license_type(Gtk.License.GPL_3_0)
+    
+    dialogus.run()
+    dialogus.destroy()
 
-google = Button(mps, text = "Google", command = lambda:web.load_website("https://www.google.com/"), bootstyle = SUCCESS)
-google.pack(side="left", padx="2", fill="x", expand=True)
+abouts = Gtk.MenuItem(label = "About Kreka")
+abouts.connect("activate", about)
+menu.append(abouts)
 
-facebook = Button(mps, text = "Facebook", command = lambda:web.load_website("https://www.facebook.com/"), bootstyle = PRIMARY)
-facebook.pack(side="left", padx="2", fill="x", expand=True)
+menu.show_all()
 
-ddg = Button(mps, text = "DuckDuckGo", command = lambda:web.load_website("https://www.duckduckgo.com/"), bootstyle = WARNING)
-ddg.pack(side="left", padx="2", fill="x", expand=True)
+kreka.set_titlebar(header)
 
-wikipedia = Button(mps, text = "Wikipedia", command = lambda:web.load_website("https://en.wikipedia.org/wiki/Main_Page"), bootstyle = DANGER)
-wikipedia.pack(side="left", padx="2", fill="x", expand=True)
+webview = WebKit2.WebView()
+webview.load_uri("https://progwi0.github.io/")
+ui.add(webview)
 
-menu = Menu(app, tearoff = 0)
+kreka.add(ui)
 
-menu.add_separator()
-menu.add_command(label="New window", command = lambda:os.system("kreka"))
-menu.add_separator()
-menu.add_command(label="Light theme", command = light)
-menu.add_command(label="Dark theme", command = dark)
-menu.add_separator()
-menu.add_command(label="Update (Only for pix version)", command = lambda:os.system("pix reinstall kreka"))
-menu.add_separator()
-menu.add_command(label="My site", command = lambda:webbrowser.open("https://progwi0.github.io/"))
-menu.add_command(label="About", command = info)
-menu.add_separator()
+kreka.connect("destroy", Gtk.main_quit)
+kreka.show_all()
 
-web = HtmlFrame(app)
-web.load_website("https://progwi0.github.io/")
-
-web.pack(fill="both", expand=True)
-
-with open(themepath, "r") as file:
-        themus = file.read().strip()
-        app.style.theme_use(themus)
-        
-app.mainloop()
+Gtk.main()
