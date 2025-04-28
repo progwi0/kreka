@@ -1,6 +1,6 @@
 # Kreka
 
-Simple Browser on Tk!
+Simple web-browser on GTK3!
 
 ## Features
 
