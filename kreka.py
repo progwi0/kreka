@@ -13,14 +13,14 @@ ui = Gtk.ScrolledWindow()
 header = Gtk.HeaderBar()
 header.set_show_close_button(True)
 
-krekacookie = Gtk.Button(label = "🍪")
+krekacookie = Gtk.Button()
 krekacookie.connect("clicked", lambda krekacookie:menu.popup(None, None, None, None, 0, Gtk.get_current_event_time()))
 
-home = Gtk.Button(label = "🏠")
+home = Gtk.Button()
 home.connect("clicked", lambda home:webview.load_uri("https://progwi0.github.io/"))
 
-back = Gtk.Button(label = "⬅️")
-forward = Gtk.Button(label = "➡️")
+back = Gtk.Button()
+forward = Gtk.Button()
 
 back.connect("clicked", lambda back:webview.go_back())
 forward.connect("clicked", lambda forward:webview.go_forward())
@@ -32,7 +32,7 @@ entry.connect("activate", lambda entry:webview.load_uri("https://www.google.com/
 
 header.set_custom_title(entry)
 
-goto = Gtk.Button(label = "➡️")
+goto = Gtk.Button()
 goto.connect("clicked", lambda goto:webview.load_uri(entry.get_text()))
 
 header.pack_start(home)
@@ -60,7 +60,7 @@ def about(widget):
     dialogus = Gtk.AboutDialog()
     
     dialogus.set_name("Kreka")
-    dialogus.set_version("8.0")
+    dialogus.set_version("9.0")
     dialogus.set_copyright("© 2025 progwi0")
     dialogus.set_comments("Simple web-browser on GTK3!")
     dialogus.set_website("https://progwi0.github.io/")
@@ -74,6 +74,21 @@ abouts.connect("activate", about)
 menu.append(abouts)
 
 menu.show_all()
+
+homeimg = Gtk.Image.new_from_icon_name("go-home-symbolic", Gtk.IconSize.BUTTON)
+home.set_image(homeimg)
+
+backimg = Gtk.Image.new_from_icon_name("go-previous-symbolic", Gtk.IconSize.BUTTON)
+back.set_image(backimg)
+
+forwardimg = Gtk.Image.new_from_icon_name("go-next-symbolic", Gtk.IconSize.BUTTON)
+forward.set_image(forwardimg)
+
+gotoimg = Gtk.Image.new_from_icon_name("mail-forward-symbolic", Gtk.IconSize.BUTTON)
+goto.set_image(gotoimg)
+
+krekaimg = Gtk.Image.new_from_icon_name("emoji-symbols-symbolic", Gtk.IconSize.BUTTON)
+krekacookie.set_image(krekaimg)
 
 kreka.set_titlebar(header)
 
