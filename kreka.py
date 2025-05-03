@@ -15,7 +15,7 @@ header = Gtk.HeaderBar()
 header.set_show_close_button(True)
 
 krekacookie = Gtk.Button()
-krekacookie.connect("clicked", lambda krekacookie:menu.popup(None, None, None, None, 0, Gtk.get_current_event_time()))
+krekacookie.connect("clicked", lambda krekacookie:menu.popup_at_pointer(None))
 
 home = Gtk.Button()
 home.connect("clicked", lambda home:webview.load_uri("https://progwi0.github.io/"))
@@ -27,6 +27,7 @@ back.connect("clicked", lambda back:webview.go_back())
 forward.connect("clicked", lambda forward:webview.go_forward())
 
 entry = Gtk.Entry()
+entry.set_alignment(0.5)
 entry.set_hexpand(True)
 
 entry.connect("activate", lambda entry:webview.load_uri("https://www.google.com/search?q=" + entry.get_text()))
@@ -57,7 +58,7 @@ def about(widget):
     dialogus = Gtk.AboutDialog()
     
     dialogus.set_program_name("Kreka")
-    dialogus.set_version("10.0")
+    dialogus.set_version("11.0")
     dialogus.set_copyright("© 2025 progwi0")
     dialogus.set_comments("Simple web-browser on GTK3!")
     
@@ -65,6 +66,7 @@ def about(widget):
     dialogus.set_logo(iconus)
     
     dialogus.set_website("https://progwi0.github.io/")
+    dialogus.set_authors(["progwi0", "chicken banana", "sigma"])
     
     dialogus.set_license_type(Gtk.License.GPL_3_0)
     
