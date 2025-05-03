@@ -1,7 +1,8 @@
 import gi
 gi.require_version("Gtk", "3.0")
 gi.require_version("WebKit2", "4.1")
-from gi.repository import Gtk, WebKit2
+gi.require_version("GdkPixbuf", "2.0")
+from gi.repository import Gtk, WebKit2, GdkPixbuf
 import os
 import webbrowser
 
@@ -48,10 +49,6 @@ newwindow = Gtk.MenuItem(label = "New window")
 newwindow.connect("activate", lambda newwindow:os.system("kreka"))
 menu.append(newwindow)
 
-update = Gtk.MenuItem(label = "Update (only for pix version)")
-update.connect("activate", lambda update:os.system("pix reinstall kreka"))
-menu.append(update)
-
 mysite = Gtk.MenuItem(label = "My site")
 mysite.connect("activate", lambda mysite:webbrowser.open("https://progwi0.github.io/"))
 menu.append(mysite)
@@ -59,11 +56,16 @@ menu.append(mysite)
 def about(widget):
     dialogus = Gtk.AboutDialog()
     
-    dialogus.set_name("Kreka")
-    dialogus.set_version("9.0")
+    dialogus.set_program_name("Kreka")
+    dialogus.set_version("10.0")
     dialogus.set_copyright("© 2025 progwi0")
     dialogus.set_comments("Simple web-browser on GTK3!")
+    
+    iconus = GdkPixbuf.Pixbuf.new_from_file_at_size("/usr/share/icons/kreka.png", 64, 64)
+    dialogus.set_logo(iconus)
+    
     dialogus.set_website("https://progwi0.github.io/")
+    
     dialogus.set_license_type(Gtk.License.GPL_3_0)
     
     dialogus.run()
@@ -94,6 +96,12 @@ kreka.set_titlebar(header)
 
 webview = WebKit2.WebView()
 webview.load_uri("https://progwi0.github.io/")
+
+def loadus(webview, load_event):
+    if load_event == WebKit2.LoadEvent.FINISHED:
+        entry.set_text(webview.get_uri())
+
+webview.connect("load-changed", loadus)
 ui.add(webview)
 
 kreka.add(ui)
