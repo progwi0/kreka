@@ -1,12 +1,12 @@
 # Kreka
 
-Simple web-browser on GTK3!
+Simple web-browser on GTK3 👣!
 
 ## Features
 
-- Simple URL navigation.
-- Simple UI.
-- Basic HTML and CSS render.
+    🌐 Simple URL navigation
+
+    🖥️ Basic CSS render
 
 ## Installation
 
