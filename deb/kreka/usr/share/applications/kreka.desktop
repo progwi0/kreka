@@ -1,5 +1,5 @@
 [Desktop Entry]
-Version=14.0
+Version=15.0
 Name=Kreka
 Comment=Kreka - Simple web-browser on GTK3!
 Exec=/usr/local/bin/kreka --name "Kreka"
