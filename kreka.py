@@ -2,13 +2,12 @@ import gi
 gi.require_version("Gtk", "3.0")
 gi.require_version("WebKit2", "4.1")
 gi.require_version("GdkPixbuf", "2.0")
-from gi.repository import Gtk, WebKit2, GdkPixbuf
+from gi.repository import Gtk, WebKit2, GdkPixbuf, Gdk
 import os
 import webbrowser
 
 kreka = Gtk.Window(title = "Kreka")
 kreka.set_default_size(1280, 960)
-kreka.set_icon_from_file("/usr/share/icons/kreka.png")
 ui = Gtk.ScrolledWindow()
 
 header = Gtk.HeaderBar()
@@ -26,11 +25,12 @@ forward = Gtk.Button()
 back.connect("clicked", lambda back:webview.go_back())
 forward.connect("clicked", lambda forward:webview.go_forward())
 
-entry = Gtk.Entry()
+entry = Gtk.SearchEntry()
+entry.set_placeholder_text("https://progwi0.github.io/")
 entry.set_alignment(0.5)
 entry.set_hexpand(True)
 
-entry.connect("activate", lambda entry:webview.load_uri("https://www.google.com/search?q=" + entry.get_text()))
+entry.connect("activate", lambda entry:webview.load_uri("https://www.qwant.com/?q=" + entry.get_text()))
 
 header.set_custom_title(entry)
 
@@ -58,7 +58,7 @@ def about(widget):
     dialogus = Gtk.AboutDialog()
     
     dialogus.set_program_name("Kreka")
-    dialogus.set_version("11.0")
+    dialogus.set_version("15.0")
     dialogus.set_copyright("© 2025 progwi0")
     dialogus.set_comments("Simple web-browser on GTK3!")
     
