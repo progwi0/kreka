@@ -11,7 +11,6 @@ kreka.set_default_size(1280, 960)
 ui = Gtk.ScrolledWindow()
 
 header = Gtk.HeaderBar()
-header.set_show_close_button(True)
 
 krekacookie = Gtk.Button()
 krekacookie.connect("clicked", lambda krekacookie:menu.popup_at_pointer(None))
@@ -20,15 +19,18 @@ home = Gtk.Button()
 home.connect("clicked", lambda home:webview.load_uri("https://progwi0.github.io/"))
 
 back = Gtk.Button()
-forward = Gtk.Button()
-
 back.connect("clicked", lambda back:webview.go_back())
-forward.connect("clicked", lambda forward:webview.go_forward())
 
 entry = Gtk.SearchEntry()
 entry.set_placeholder_text("https://progwi0.github.io/")
 entry.set_alignment(0.5)
 entry.set_hexpand(True)
+
+forward = Gtk.Button()
+forward.connect("clicked", lambda forward:webview.go_forward())
+
+refresh = Gtk.Button()
+refresh.connect("clicked", lambda refresh:webview.reload())
 
 entry.connect("activate", lambda entry:webview.load_uri("https://www.qwant.com/?q=" + entry.get_text()))
 
@@ -37,12 +39,17 @@ header.set_custom_title(entry)
 goto = Gtk.Button()
 goto.connect("clicked", lambda goto:webview.load_uri(entry.get_text()))
 
+closus = Gtk.Button()
+closus.connect("clicked", Gtk.main_quit)
+
 header.pack_start(home)
 header.pack_start(back)
 header.pack_start(forward)
 header.pack_start(entry)
-header.pack_end(goto)
+header.pack_end(closus)
 header.pack_end(krekacookie)
+header.pack_end(goto)
+header.pack_end(refresh)
 
 menu = Gtk.Menu()
 
@@ -58,7 +65,7 @@ def about(widget):
     dialogus = Gtk.AboutDialog()
     
     dialogus.set_program_name("Kreka")
-    dialogus.set_version("15.0")
+    dialogus.set_version("17.0")
     dialogus.set_copyright("© 2025 progwi0")
     dialogus.set_comments("Simple web-browser on GTK3!")
     
@@ -88,8 +95,14 @@ back.set_image(backimg)
 forwardimg = Gtk.Image.new_from_icon_name("go-next-symbolic", Gtk.IconSize.BUTTON)
 forward.set_image(forwardimg)
 
+refreshimg = Gtk.Image.new_from_icon_name("view-refresh-symbolic", Gtk.IconSize.BUTTON)
+refresh.set_image(refreshimg)
+
 gotoimg = Gtk.Image.new_from_icon_name("mail-forward-symbolic", Gtk.IconSize.BUTTON)
 goto.set_image(gotoimg)
+
+closusimg = Gtk.Image.new_from_icon_name("window-close-symbolic", Gtk.IconSize.BUTTON)
+closus.set_image(closusimg)
 
 krekaimg = Gtk.Image.new_from_icon_name("emoji-symbols-symbolic", Gtk.IconSize.BUTTON)
 krekacookie.set_image(krekaimg)
