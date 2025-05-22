@@ -14,4 +14,4 @@ Kreka - simple web-browser on GTK3 👣!
     
 ## Installation
 
-You can download Kreka from releases or via [Pix](https://github.com/progwi0/pix).
+You can download Kreka from [releases](https://github.com/progwi0/kreka/releases) or via [Pix](https://github.com/progwi0/pix).
