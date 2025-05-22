@@ -7,9 +7,9 @@ Simple web-browser on GTK3 👣!
     🌐 Simple URL navigation
 
     🖥️ Basic CSS render
+------------------------------
 ## Screenshots
-
-[Kreka on KDE Plasma 6.3](./screenshots/Screenshot_20250522_145954.png)
+![Kreka on KDE Plasma 6.3](./screenshots/Screenshot_20250522_145954.png)
 ------------------------------
 ## Installation
 
