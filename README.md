@@ -1,8 +1,8 @@
 # Kreka
 
-![Kreka on KDE Plasma 6.3](./screenshots/Screenshot_20250522_145954.png)
+Kreka - simple web-browser on GTK3 👣!
 
-Simple web-browser on GTK3 👣!
+![Kreka on KDE Plasma 6.3](./screenshots/Screenshot_20250522_145954.png)
 
 ## Features
 
@@ -14,5 +14,4 @@ Simple web-browser on GTK3 👣!
     
 ## Installation
 
-You can install Kreka via [Pix](https://github.com/progwi0/pix)!
-(or you can download Kreka in releases.)
+You can download Kreka from releases or via [Pix](https://github.com/progwi0/pix).
