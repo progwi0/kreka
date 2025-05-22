@@ -6,9 +6,11 @@ Simple web-browser on GTK3 👣!
 
 ## Features
 
-    🌐 Simple URL navigation
+- 🌐 Simple URL navigation
 
-    🖥️ Basic CSS render
+- 🖥️ Basic CSS/HTML render
+
+- 🖥️ HTTP and HTTPS support.
     
 ## Installation
 
