@@ -51,16 +51,6 @@ header.pack_end(krekacookie)
 header.pack_end(goto)
 header.pack_end(refresh)
 
-menu = Gtk.Menu()
-
-newwindow = Gtk.MenuItem(label = "New window")
-newwindow.connect("activate", lambda newwindow:os.system("kreka"))
-menu.append(newwindow)
-
-mysite = Gtk.MenuItem(label = "My site")
-mysite.connect("activate", lambda mysite:webbrowser.open("https://progwi0.github.io/"))
-menu.append(mysite)
-
 def distro():
     with open("/etc/os-release") as f:
             lines = f.readlines()
@@ -72,10 +62,10 @@ def about(widget):
     dialogus = Gtk.AboutDialog()
     
     dialogus.set_program_name(f"Kreka")
-    dialogus.set_version("19.0")
+    dialogus.set_version("19.1")
     dialogus.set_copyright("© 2025 progwi0")
     dialogus.set_comments(f"Simple web-browser on GTK3! (Running in {distro()})")
-    
+
     dialogus.set_website("https://progwi0.github.io/")
     dialogus.set_authors(["progwi0", "chicken banana", "sigma"])
     
@@ -83,12 +73,6 @@ def about(widget):
     
     dialogus.run()
     dialogus.destroy()
-
-abouts = Gtk.MenuItem(label = "About Kreka")
-abouts.connect("activate", about)
-menu.append(abouts)
-
-menu.show_all()
 
 exp = Gtk.Popover()
 
