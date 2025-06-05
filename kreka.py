@@ -133,6 +133,3 @@ kreka.connect("destroy", Gtk.main_quit)
 kreka.show_all()
 
 Gtk.main()
-kreka.show_all()
-
-Gtk.main()
