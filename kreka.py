@@ -62,7 +62,7 @@ def about(widget):
     dialogus = Gtk.AboutDialog()
     
     dialogus.set_program_name(f"Kreka")
-    dialogus.set_version("19.1")
+    dialogus.set_version("19.2")
     dialogus.set_copyright("© 2025 progwi0")
     dialogus.set_comments(f"Simple web-browser on GTK3! (Running in {distro()})")
 
@@ -80,7 +80,7 @@ menus = Gtk.Box(spacing=1, orientation=Gtk.Orientation.VERTICAL)
 
 newwindows = Gtk.Button(label = "New window")
 newwindows.connect("clicked", lambda newwindow:os.system("kreka"))
-menus.pack_start(newwindow, True, True, 0)
+menus.pack_start(newwindows, True, True, 0)
 
 mysite = Gtk.Button(label = "My site")
 mysite.connect("clicked", lambda mysite:webbrowser.open("https://progwi0.github.io/"))
@@ -130,6 +130,9 @@ ui.add(webview)
 kreka.add(ui)
 
 kreka.connect("destroy", Gtk.main_quit)
+kreka.show_all()
+
+Gtk.main()
 kreka.show_all()
 
 Gtk.main()
