@@ -12,8 +12,8 @@ ui = Gtk.ScrolledWindow()
 
 header = Gtk.HeaderBar()
 
-krekacookie = Gtk.Button()
-krekacookie.connect("clicked", lambda krekacookie:menu.popup_at_pointer(None))
+krekacookie = Gtk.MenuButton()
+krekacookie.connect("clicked", lambda krekacookie:exp.show_all())
 
 home = Gtk.Button()
 home.connect("clicked", lambda home:webview.load_uri("https://progwi0.github.io/"))
@@ -61,16 +61,20 @@ mysite = Gtk.MenuItem(label = "My site")
 mysite.connect("activate", lambda mysite:webbrowser.open("https://progwi0.github.io/"))
 menu.append(mysite)
 
+def distro():
+    with open("/etc/os-release") as f:
+            lines = f.readlines()
+            for line in lines:
+                if line.startswith("ID="):
+                    return line.strip().split("=")[1].strip('"')
+
 def about(widget):
     dialogus = Gtk.AboutDialog()
     
-    dialogus.set_program_name("Kreka")
-    dialogus.set_version("17.0")
+    dialogus.set_program_name(f"Kreka")
+    dialogus.set_version("19.0")
     dialogus.set_copyright("© 2025 progwi0")
-    dialogus.set_comments("Simple web-browser on GTK3!")
-    
-    iconus = GdkPixbuf.Pixbuf.new_from_file_at_size("/usr/share/icons/kreka.png", 64, 64)
-    dialogus.set_logo(iconus)
+    dialogus.set_comments(f"Simple web-browser on GTK3! (Running in {distro()})")
     
     dialogus.set_website("https://progwi0.github.io/")
     dialogus.set_authors(["progwi0", "chicken banana", "sigma"])
@@ -85,6 +89,26 @@ abouts.connect("activate", about)
 menu.append(abouts)
 
 menu.show_all()
+
+exp = Gtk.Popover()
+
+menus = Gtk.Box(spacing=1, orientation=Gtk.Orientation.VERTICAL)
+
+newwindows = Gtk.Button(label = "New window")
+newwindows.connect("clicked", lambda newwindow:os.system("kreka"))
+menus.pack_start(newwindow, True, True, 0)
+
+mysite = Gtk.Button(label = "My site")
+mysite.connect("clicked", lambda mysite:webbrowser.open("https://progwi0.github.io/"))
+menus.pack_start(mysite, True, True, 0)
+
+abouts = Gtk.Button(label = "About Kreka")
+abouts.connect("clicked", about)
+menus.pack_start(abouts, True, True, 0)
+
+exp.add(menus)
+
+krekacookie.set_popover(exp)
 
 homeimg = Gtk.Image.new_from_icon_name("go-home-symbolic", Gtk.IconSize.BUTTON)
 home.set_image(homeimg)
