@@ -1,135 +1,86 @@
-import gi
-gi.require_version("Gtk", "3.0")
-gi.require_version("WebKit2", "4.1")
-gi.require_version("GdkPixbuf", "2.0")
-from gi.repository import Gtk, WebKit2, GdkPixbuf, Gdk
 import os
+import sys
 import webbrowser
 
-kreka = Gtk.Window(title = "Kreka")
-kreka.set_default_size(1280, 960)
-ui = Gtk.ScrolledWindow()
+from tkinter import *
+from tkinter import messagebox as dialogus
+from tkinter import ttk
 
-header = Gtk.HeaderBar()
+from tkinterweb import HtmlFrame
 
-krekacookie = Gtk.MenuButton()
-krekacookie.connect("clicked", lambda krekacookie:exp.show_all())
+import sv_ttk
+import darkdetect
+import pywinstyles
 
-home = Gtk.Button()
-home.connect("clicked", lambda home:webview.load_uri("https://progwi0.github.io/"))
+app = Tk()
+app.title("Kreka")
 
-back = Gtk.Button()
-back.connect("clicked", lambda back:webview.go_back())
+sv_ttk.set_theme(darkdetect.theme())
 
-entry = Gtk.SearchEntry()
-entry.set_placeholder_text("https://progwi0.github.io/")
-entry.set_alignment(0.5)
-entry.set_hexpand(True)
+def titlus():
+    version = sys.getwindowsversion()
 
-forward = Gtk.Button()
-forward.connect("clicked", lambda forward:webview.go_forward())
+    if version.major == 10 and version.build >= 22000:
+        pywinstyles.change_header_color(app, "#1c1c1c" if sv_ttk.get_theme() == "dark" else "#fafafa")
 
-refresh = Gtk.Button()
-refresh.connect("clicked", lambda refresh:webview.reload())
+def search():
+    query = adress.get()
+    web.load_website(f"https://www.google.com/search?q={query}")
 
-entry.connect("activate", lambda entry:webview.load_uri("https://www.qwant.com/?q=" + entry.get_text()))
+def goto():
+    query = adress.get()
+    web.load_website(f"https://{query}")
 
-header.set_custom_title(entry)
+def info():
+    dialogus.showinfo("🍪", "Kreka 20.0\nBack again to Tk!\nCreated in 2025 by progwi0.\n(Sun Valley theme by rdbende. Check it out on GitHub!)")
 
-goto = Gtk.Button()
-goto.connect("clicked", lambda goto:webview.load_uri(entry.get_text()))
+top = ttk.Frame(app)
+top.pack(fill="x", pady="4", padx= "2")
 
-closus = Gtk.Button()
-closus.connect("clicked", Gtk.main_quit)
+home = ttk.Button(top, text = "🏠", width=2 , command = lambda:web.load_website("https://progwi0.github.io/"))
 
-header.pack_start(home)
-header.pack_start(back)
-header.pack_start(forward)
-header.pack_start(entry)
-header.pack_end(closus)
-header.pack_end(krekacookie)
-header.pack_end(goto)
-header.pack_end(refresh)
+home.pack(side="left", padx="2")
 
-def distro():
-    with open("/etc/os-release") as f:
-            lines = f.readlines()
-            for line in lines:
-                if line.startswith("ID="):
-                    return line.strip().split("=")[1].strip('"')
+adress = ttk.Entry(top)
+adress.pack(side="left", fill="both", expand=True)
 
-def about(widget):
-    dialogus = Gtk.AboutDialog()
-    
-    dialogus.set_program_name(f"Kreka")
-    dialogus.set_version("19.2")
-    dialogus.set_copyright("© 2025 progwi0")
-    dialogus.set_comments(f"Simple web-browser on GTK3! (Running in {distro()})")
+search = ttk.Button(top, text = "🔍", width=2 , command=search)
+search.pack(side="left", padx="2")
 
-    dialogus.set_website("https://progwi0.github.io/")
-    dialogus.set_authors(["progwi0", "chicken banana", "sigma"])
-    
-    dialogus.set_license_type(Gtk.License.GPL_3_0)
-    
-    dialogus.run()
-    dialogus.destroy()
+goto = ttk.Button(top, text = "➡️", width=2 , command=goto)
+goto.pack(side="left", padx="2")
 
-exp = Gtk.Popover()
+mps = ttk.Frame(app)
+mps.pack(fill="x", pady="2", padx="2")
 
-menus = Gtk.Box(spacing=1, orientation=Gtk.Orientation.VERTICAL)
+kreka = ttk.Button(mps, text = "🍪", width=2 , command = lambda:menu.post(app.winfo_pointerx(), app.winfo_pointery()))
+kreka.pack(side="left", padx="2")
 
-newwindows = Gtk.Button(label = "New window")
-newwindows.connect("clicked", lambda newwindow:os.system("kreka"))
-menus.pack_start(newwindows, True, True, 0)
+google = ttk.Button(mps, text = "Google", command = lambda:web.load_website("https://www.google.com/"))
+google.pack(side="left", padx="2", fill="x", expand=True)
 
-mysite = Gtk.Button(label = "My site")
-mysite.connect("clicked", lambda mysite:webbrowser.open("https://progwi0.github.io/"))
-menus.pack_start(mysite, True, True, 0)
+facebook = ttk.Button(mps, text = "Facebook", command = lambda:web.load_website("https://www.facebook.com/"))
+facebook.pack(side="left", padx="2", fill="x", expand=True)
 
-abouts = Gtk.Button(label = "About Kreka")
-abouts.connect("clicked", about)
-menus.pack_start(abouts, True, True, 0)
+ddg = ttk.Button(mps, text = "DuckDuckGo", command = lambda:web.load_website("https://www.duckduckgo.com/"))
+ddg.pack(side="left", padx="2", fill="x", expand=True)
 
-exp.add(menus)
+wikipedia = ttk.Button(mps, text = "Wikipedia", command = lambda:web.load_website("https://en.wikipedia.org/wiki/Main_Page"))
+wikipedia.pack(side="left", padx="2", fill="x", expand=True)
 
-krekacookie.set_popover(exp)
+menu = Menu(app, tearoff = 0)
 
-homeimg = Gtk.Image.new_from_icon_name("go-home-symbolic", Gtk.IconSize.BUTTON)
-home.set_image(homeimg)
+menu.add_separator()
+menu.add_command(label="New window", command = lambda:os.system("kreka"))
+menu.add_separator()
+menu.add_command(label="My site", command = lambda:webbrowser.open("https://progwi0.github.io/"))
+menu.add_command(label="About", command = info)
+menu.add_separator()
 
-backimg = Gtk.Image.new_from_icon_name("go-previous-symbolic", Gtk.IconSize.BUTTON)
-back.set_image(backimg)
+web = HtmlFrame(app)
+web.load_website("https://progwi0.github.io/")
 
-forwardimg = Gtk.Image.new_from_icon_name("go-next-symbolic", Gtk.IconSize.BUTTON)
-forward.set_image(forwardimg)
+web.pack(fill="both", expand=True)
 
-refreshimg = Gtk.Image.new_from_icon_name("view-refresh-symbolic", Gtk.IconSize.BUTTON)
-refresh.set_image(refreshimg)
-
-gotoimg = Gtk.Image.new_from_icon_name("mail-forward-symbolic", Gtk.IconSize.BUTTON)
-goto.set_image(gotoimg)
-
-closusimg = Gtk.Image.new_from_icon_name("window-close-symbolic", Gtk.IconSize.BUTTON)
-closus.set_image(closusimg)
-
-krekaimg = Gtk.Image.new_from_icon_name("emoji-symbols-symbolic", Gtk.IconSize.BUTTON)
-krekacookie.set_image(krekaimg)
-
-kreka.set_titlebar(header)
-
-webview = WebKit2.WebView()
-webview.load_uri("https://progwi0.github.io/")
-
-def loadus(webview, load_event):
-    if load_event == WebKit2.LoadEvent.FINISHED:
-        entry.set_text(webview.get_uri())
-
-webview.connect("load-changed", loadus)
-ui.add(webview)
-
-kreka.add(ui)
-
-kreka.connect("destroy", Gtk.main_quit)
-kreka.show_all()
-
-Gtk.main()
+titlus()
+app.mainloop()
