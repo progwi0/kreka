@@ -1,8 +1,8 @@
 # Kreka
 
-### DEB-PACKAGES ISN'T SUPPORTED ANYMORE!
+### LINUX ISN'T SUPPORTED ANYMORE!
 
-Kreka - simple web-browser on GTK3 👣!
+Kreka - simple web-browser on Tk !
 
 ![Kreka on KDE Plasma 6.3](./screenshots/Screenshot_20250522_145954.png)
 
