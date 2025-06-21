@@ -4,7 +4,7 @@
 
 Kreka - simple web-browser on Tk 🪶!
 
-![Kreka 20.0 on Windows 11]("./screenshots/win11kreka20.png")
+![Kreka 20.0 on Windows 11](./screenshots/win11kreka20.png)
 
 ## Features
 
