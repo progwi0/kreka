@@ -4,16 +4,13 @@
 
 Kreka - simple web-browser on Tk 🪶!
 
-![Kreka 19.x on KDE Plasma 6.3](./screenshots/Screenshot_20250522_145954.png)
-^ Kreka 19.x on KDE Plasma 6.3! ^
+![Kreka 20.0 on Windows 11](./screenshots/Screenshot 2025-06-21 153642.png)
 
 ## Features
 
 - 🌐 Simple URL navigation
 
 - 🖥️ Basic CSS/HTML render
-
-- 🖥️ HTTP and HTTPS support.
     
 ## Installation
 
