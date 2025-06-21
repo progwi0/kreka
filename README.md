@@ -2,9 +2,10 @@
 
 ### LINUX ISN'T SUPPORTED ANYMORE!
 
-Kreka - simple web-browser on Tk !
+Kreka - simple web-browser on Tk 🪶!
 
-![Kreka on KDE Plasma 6.3](./screenshots/Screenshot_20250522_145954.png)
+![Kreka 19.x on KDE Plasma 6.3](./screenshots/Screenshot_20250522_145954.png)
+^ Kreka 19.x on KDE Plasma 6.3! ^
 
 ## Features
 
