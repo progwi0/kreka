@@ -1,4 +1,4 @@
-# Kreka
+# 🍪 Kreka
 🍪 Fast cookie.
 
 Kreka is a fast browser, which can run on every Windows PC!
