@@ -1,6 +1,9 @@
 # 🍪 Kreka
 🍪 Fast cookie.
 
+> [!IMPORTANT]
+> The development of this project is FOR NOW frozen, I will unfreeze it soon.
+
 Kreka is a fast browser, which can run on every Windows PC!
 
 ![🍪 Kreka 20.0 on Windows 11 🪟](./screenshots/win11kreka20.png)
