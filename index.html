@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Kreka</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="kreka.png">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.13.2/brython.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.13.2/brython_stdlib.js"></script>
+    </head>
+    <body>
+        <center>
+            <header>
+                <b>Kreka</b>
+            </header>
+        </center>
+        <center>
+            <main>
+                <h1 id="titlet">Опаньки!</h1>
+                <span id="justt">Скрипт медленный или нерабочий. Извините.</span>
+                <br />
+                <br />
+                <h6>Чего медлить? Скачать Kreka можно по кнопкам ниже.</h6>
+                <button onclick="location.href = 'Kreka-26-3-rf.apk'">Последняя версия Kreka</button>
+            </main>
+        </center>
+        <center>
+            <footer>
+                <span style="color: rgb(255, 255, 255, 0.5)">2026, progwi0.</span>
+            </footer>
+        </center>
+    </body>
+    <script type="text/python">
+        from browser import document
+        import random
+
+        rnd = random.randint(0,2)
+
+        if rnd == 0:
+            document["titlet"].text = "Попробуйте новый опыт веб-сёрфинга."
+            document["justt"].text = "Браузер Kreka отличается от других браузеров новым интерфейсом и улучшенными мерами безопасности."
+        elif rnd == 1:
+            document["titlet"].text = "Вы в безопасности."
+            document["justt"].text = "Kreka не собирает ваши данные с хранилища, данные об устройстве и пароли."
+        elif rnd == 2:
+            document["titlet"].text = "Создан для вас."
+            document["justt"].text = "Браузер Kreka создан специально для вас и для вашего смартфона."
+    </script>
+</html>
