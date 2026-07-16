@@ -3,6 +3,8 @@
 body{
     background-color: rgb(255, 221, 193);
     color: rgb(77, 34, 0);
+    height: 100%;
+    width: 100%;
     font-family: Tiny5;
     justify-content: center;
     align-content: center;
