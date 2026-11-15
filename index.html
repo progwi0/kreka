@@ -1,47 +1,244 @@
-<html>
-    <head>
-        <title>Kreka</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" type="image/x-icon" href="kreka.png">
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.13.2/brython.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.13.2/brython_stdlib.js"></script>
-    </head>
-    <body>
-        <center>
-            <header>
-                <b onclick="location.href = './index.html'">Kreka</b>
-            </header>
-        </center>
-        <center>
-            <main>
-                <h1 id="titlet">Опаньки!</h1>
-                <span id="justt">Скрипт медленный или нерабочий. Извините.</span>
-                <br />
-                <br />
-                <h6>Чего медлить? Скачать Kreka можно по кнопкам ниже.</h6>
-                <button onclick="location.href = 'Kreka-26-3-rf.apk'">Последняя версия Kreka</button>
-            </main>
-        </center>
-        <center>
-            <footer>
-                <span style="color: rgb(255, 255, 255, 0.5)">2026, progwi0.</span>
-            </footer>
-        </center>
-    </body>
-    <script type="text/python">
-        from browser import document
-        import random
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/beercss@5.0.1/dist/cdn/beer.min.css" rel="stylesheet" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@5.0.1/dist/cdn/beer.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.4/dist/cdn/material-dynamic-colors.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="logos/kreka26.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kreka</title>
+  </head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
 
-        rnd = random.randint(0,2)
+    *{
+      font-family: Tiny5;
+    }
 
-        if rnd == 0:
-            document["titlet"].text = "Попробуйте новый опыт веб-сёрфинга."
-            document["justt"].text = "Браузер Kreka отличается от других браузеров новым интерфейсом и улучшенными мерами безопасности."
-        elif rnd == 1:
-            document["titlet"].text = "Вы в безопасности."
-            document["justt"].text = "Kreka не собирает ваши данные с хранилища, данные об устройстве и пароли."
-        elif rnd == 2:
-            document["titlet"].text = "Создан для вас."
-            document["justt"].text = "Браузер Kreka создан специально для вас и для вашего смартфона."
-    </script>
+    body.light{
+        --primary:#9a4522;
+        --on-primary:#ffffff;
+        --primary-container:#ffdbcf;
+        --on-primary-container:#380d00;
+        --secondary:#77574c;
+        --on-secondary:#ffffff;
+        --secondary-container:#ffdbcf;
+        --on-secondary-container:#2c160d;
+        --tertiary:#695e2f;
+        --on-tertiary:#ffffff;
+        --tertiary-container:#f2e2a8;
+        --on-tertiary-container:#211b00;
+        --error:#ba1a1a;
+        --on-error:#ffffff;
+        --error-container:#ffdad6;
+        --on-error-container:#410002;
+        --background:#fffbff;
+        --on-background:#201a18;
+        --surface:#fff8f6;
+        --on-surface:#201a18;
+        --surface-variant:#f5ded6;
+        --on-surface-variant:#53433e;
+        --outline:#85736d;
+        --outline-variant:#d8c2bb;
+        --shadow:#000000;
+        --scrim:#000000;
+        --inverse-surface:#362f2c;
+        --inverse-on-surface:#fbeeea;
+        --inverse-primary:#ffb59a;
+        --surface-dim:#e4d7d4;
+        --surface-bright:#fff8f6;
+        --surface-container-lowest:#ffffff;
+        --surface-container-low:#fef1ed;
+        --surface-container:#f8ebe7;
+        --surface-container-high:#f3e5e2;
+        --surface-container-highest:#ede0dc;
+    }
+
+    body.dark{
+        background: url('./screenshots/screenshot-linux.png');
+        background-color: black;
+        backdrop-filter: brightness(25%) blur(50px);
+        background-position-x: center;
+        background-position-y: center;
+        background-size: 500%;
+
+        --primary:#50FA7B;
+        --on-primary:#282A36;
+        --primary-container:#44475A;
+        --on-primary-container:#F8F8F2;
+        --secondary:#BD93F9;
+        --on-secondary:#442a20;
+        --secondary-container:#5d4035;
+        --on-secondary-container:#ffdbcf;
+        --tertiary:#F1FA8C;
+        --on-tertiary:#282A36;
+        --tertiary-container:#44475A;
+        --on-tertiary-container:#F1FA8C;
+        --error:#FF5555;
+        --on-error:#282A36;
+        --error-container:#44475A;
+        --on-error-container:#FF5555;
+        --background:#282A36;
+        --on-background:#F8F8F2;
+        --surface:#282A36;
+        --on-surface:#F8F8F2;
+        --surface-variant:#44475A;
+        --on-surface-variant:#6272A4;
+        --outline:#6272A4;
+        --outline-variant:#44475A;
+        --shadow:#000000;
+        --scrim:#000000;
+        --inverse-surface:#F8F8F2;
+        --inverse-on-surface:#44475A;
+        --inverse-primary:#44475A;
+        --surface-dim:#282A36;
+        --surface-bright:#44475A;
+        --surface-container-lowest:#282A36;
+        --surface-container-low:#282A36;
+        --surface-container:#44475A;
+        --surface-container-high:#44475A;
+        --surface-container-highest:#44475A;
+    }
+
+    .card-article {
+        width: 27.5%;
+        align-self: center;
+    }
+
+    .spec-article {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        width: 100%;
+        height: 100%;
+    }
+  </style>
+  <body class="dark">
+    <dialog id="nopa">
+      <h5>Неа.</h5>
+      <div>Зачем тебе тыкать сюда, если есть кнопка?</div>
+      <nav>
+        <button class="transparent max left" onclick="document.querySelector('#nopa').close();">Просто так.</button>
+        <button class="transparent max right" onclick="document.querySelector('#nopa').close(); document.querySelector('#idkt').show();">Не знаю...</button>
+      </nav>
+    </dialog>
+    <dialog id="idkt">
+      <h5>Блина.</h5>
+      <div>Вот и я не знаю...</div>
+      <nav>
+        <button class="transparent max" onclick="document.querySelector('#idkt').close();">Ну ладно...</button>
+      </nav>
+    </dialog>
+
+    <header>
+      <nav>
+        <button class="transparent center-align max" onclick="location.href = './index.html'">
+          <img src="logos/kreka26.png" />
+        </button>
+        <button class="transparent center-align max" onclick="location.href = 'https://github.com/progwi0/kreka'">
+          <i>commit</i>
+        </button>
+      </nav>
+    </header>
+    <main class="max">
+        <article class="center-align transparent large middle-align" style="display: flex; flex-direction: column;">
+          <div>
+            <h1>Fast cookie.</h1>
+            <h6>Kreka is a fast and convenient browser for you and your system.</h6>
+          </div>
+          <br />
+          <br />
+          <div>
+            <button class="center-align max" onclick="location.href = 'https://github.com/progwi0/kreka'">
+                <i>commit</i>
+                <span>Repository</span>
+            </button>
+          </div>
+        </article>
+        <br />
+        <article class="center-align transparent large middle-align">
+          <div>
+            <h1>Why Kreka?</h1>
+          </div>
+          <br />
+          <br />
+        </article>
+        <div style="justify-content: center; align-items: center; display: flex;">
+            <article class="card-article no-padding">
+                <div class="grid no-space">
+                    <div class="s6">
+                    <img width="275" src="https://wiki.gnome.org/attachments/Projects(2f)GTK(2f)Logo/gtk-logo.svg">
+                    </div>
+                    <div class="s6">
+                    <div class="padding">
+                        <h5>Harmony</h5>
+                        <p>Kreka uses GTK and Libadwaita to blend in with your preferred desktop environment. But if you’re not using GNOME, don’t worry - it looks great on other desktop environments, too.</p>
+                        <nav>
+                        <button class="border round max" onclick="location.href= 'https://www.gtk.org/'">GTK</button>
+                        </nav>
+                    </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <br />
+        <div style="justify-content: center; align-items: center; display: flex;">
+            <article class="card-article no-padding" style="width: 27%;">
+                <div class="grid no-space">
+                    <div class="s6">
+                    <div class="padding">
+                        <h5>Powered by Ruby</h5>
+                        <p>Kreka is written in Ruby - the best and most delightful programming language, conceived and created by Yukihiro Matsumoto.</p>
+                        <nav>
+                        <button class="border round max" onclick="location.href= 'https://www.ruby-lang.org/'">Ruby</button>
+                        </nav>
+                    </div>
+                    </div>
+                    <div class="s6">
+                    <img width="253" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Ruby_logo.png/960px-Ruby_logo.png?utm_source=uk.wikipedia.org&utm_campaign=index&utm_content=thumbnail">
+                    </div>
+                </div>
+            </article>
+        </div>
+        <br />
+        <div style="justify-content: center; align-items: center; display: flex;">
+            <article class="card-article no-padding" style="width: 43%;">
+                <div class="grid no-space">
+                    <div class="s6">
+                    <img width="402" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/GPLv3_Logo.svg/960px-GPLv3_Logo.svg.png?utm_source=ru.wikipedia.org&utm_campaign=index&utm_content=thumbnail">
+                    </div>
+                    <div class="s6">
+                    <div class="padding">
+                        <h5>It's free</h5>
+                        <p>The source code for Krek is open; you may use, modify, and contribute to it, in accordance with the GNU GPL-3.0 license.</p>
+                        <nav>
+                        <button class="border round max" onclick="location.href= 'https://www.gnu.org/licenses/gpl-3.0.html'">GPL-3.0</button>
+                        </nav>
+                    </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <br />
+        <article class="center-align transparent large middle-align" style="display: flex; flex-direction: column;">
+          <div>
+            <h1>Why delay?</h1>
+            <h6>Clone and run Kreka right now!</h6>
+          </div>
+          <br />
+          <br />
+          <div>
+            <button class="center-align max" onclick="location.href = 'https://github.com/progwi0/kreka'">
+                <i>commit</i>
+                <span>Repository</span>
+            </button>
+          </div>
+        </article>
+    </main>
+    <footer>
+        <center><span>2021-2026 progwi0.</span></center>
+    </footer>
+  </body>
 </html>
